@@ -1,24 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenBookHub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+        }
+
+        /* Navbar */
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: white;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Books section */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .btn:hover {
+            background: #0f2557;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #1e3a8a;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to OpenBookHub</h1>
-    <p>Discover free educational books and learning resources.</p>
 
-    <h2>Featured Books</h2>
+<header>
+    <h1>OpenBookHub</h1>
+</header>
 
-    <div>
+<section class="hero">
+    <h2>Welcome to OpenBookHub 📚</h2>
+    <p>Discover free educational books and learning resources</p>
+</section>
+
+<section class="container">
+
+    <div class="card">
         <h3>Science Book</h3>
         <p>Learn amazing science facts.</p>
-        <a href="#">Download PDF</a>
+        <a class="btn" href="#">Download PDF</a>
     </div>
 
-    <div>
+    <div class="card">
         <h3>History Book</h3>
         <p>Explore world history.</p>
-        <a href="#">Download PDF</a>
+        <a class="btn" href="#">Download PDF</a>
     </div>
+
+</section>
+
+<footer>
+    © 2026 OpenBookHub | Made with ❤️
+</footer>
+
 </body>
 </html>
