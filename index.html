@@ -3,224 +3,262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OpenBookHub Ultimate</title>
+<title>OpenBookHub - Learn Smarter</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-    --bg:#f4f6f9;
-    --text:#111;
-    --card:#fff;
-    --primary:#1e3a8a;
+    --bg:#f6f8fc;
+    --text:#0f172a;
+    --card:#ffffff;
+    --primary:#2563eb;
+    --muted:#64748b;
 }
 
 body.dark{
-    --bg:#0f172a;
-    --text:#e2e8f0;
-    --card:#1e293b;
+    --bg:#0b1220;
+    --text:#e5e7eb;
+    --card:#111827;
     --primary:#3b82f6;
+    --muted:#94a3b8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter, sans-serif;
 }
 
 body{
-    margin:0;
-    font-family:Arial;
     background:var(--bg);
     color:var(--text);
     transition:0.3s;
 }
 
-/* HEADER */
-header{
+/* NAVBAR */
+nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px 20px;
-    background:var(--primary);
-    color:white;
+    padding:15px 40px;
+    background:var(--card);
+    position:sticky;
+    top:0;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
-button{
+.logo{
+    font-weight:700;
+    font-size:20px;
+    color:var(--primary);
+}
+
+.nav-links button{
+    margin-left:10px;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
     cursor:pointer;
+    background:var(--primary);
+    color:white;
 }
 
 /* HERO */
 .hero{
     text-align:center;
-    padding:30px 20px;
+    padding:80px 20px;
 }
 
-input{
-    padding:10px;
-    width:80%;
-    max-width:400px;
-    border-radius:8px;
-    border:1px solid #ccc;
+.hero h1{
+    font-size:42px;
+    margin-bottom:10px;
 }
 
-/* BUTTONS */
-.btn{
+.hero p{
+    color:var(--muted);
+    font-size:18px;
+}
+
+.cta{
+    margin-top:20px;
+    padding:12px 20px;
     background:var(--primary);
     color:white;
-    padding:8px 12px;
     border:none;
-    border-radius:6px;
-    margin:5px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
 }
 
-/* GRID */
-.container{
+/* FEATURES */
+.features{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-    padding:20px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:40px;
 }
 
-/* CARD */
 .card{
     background:var(--card);
-    padding:15px;
+    padding:20px;
     border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
     transition:0.3s;
 }
 
 .card:hover{
-    transform:scale(1.05);
+    transform:translateY(-5px);
 }
 
-/* FAVORITE */
-.fav{
-    float:right;
-    cursor:pointer;
+/* BOOKS */
+.section-title{
+    text-align:center;
+    margin-top:40px;
+    font-size:28px;
 }
 
-/* MODAL */
-.modal{
-    display:none;
-    position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    background:rgba(0,0,0,0.7);
-    justify-content:center;
-    align-items:center;
+.books{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    padding:40px;
 }
 
-.modal-content{
-    background:white;
-    padding:20px;
+.book{
+    background:var(--card);
+    padding:15px;
     border-radius:10px;
-    width:300px;
+    transition:0.3s;
 }
 
-body.dark .modal-content{
-    background:#1e293b;
-    color:white;
+.book:hover{
+    transform:scale(1.03);
+}
+
+/* TESTIMONIALS */
+.testimonials{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:40px;
+}
+
+.quote{
+    background:var(--card);
+    padding:20px;
+    border-radius:12px;
+    font-style:italic;
+}
+
+/* NEWSLETTER */
+.newsletter{
+    text-align:center;
+    padding:50px 20px;
+}
+
+.newsletter input{
+    padding:10px;
+    width:250px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:var(--card);
+    margin-top:40px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h2>OpenBookHub 🚀</h2>
-<button class="btn" onclick="toggleTheme()">🌙</button>
-</header>
+<!-- NAV -->
+<nav>
+<div class="logo">OpenBookHub 🚀</div>
+<div class="nav-links">
+<button onclick="toggleTheme()">🌙</button>
+<button>Get Started</button>
+</div>
+</nav>
 
-<div class="hero">
-<h2>Ultimate Book Library 📚</h2>
-<input id="search" onkeyup="searchBooks()" placeholder="Search books...">
-<br><br>
-<button class="btn" onclick="filter('all')">All</button>
-<button class="btn" onclick="filter('science')">Science</button>
-<button class="btn" onclick="filter('history')">History</button>
-<button class="btn" onclick="showFav()">❤️ Favorites</button>
+<!-- HERO -->
+<section class="hero">
+<h1>Learn Anything. Anytime. 📚</h1>
+<p>A modern platform for free educational books and smart learning</p>
+<button class="cta">Start Learning</button>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+<div class="card">
+<h3>⚡ Fast Learning</h3>
+<p>Access books instantly with clean UI</p>
 </div>
 
-<div class="container" id="books">
-
-<div class="card science">
-<span class="fav" onclick="fav(this)">❤️</span>
-<h3 onclick="openModal('Science Book','Amazing science learning book')">Science Book</h3>
-<p>Learn science easily</p>
+<div class="card">
+<h3>📚 Huge Library</h3>
+<p>Science, History, Physics & more</p>
 </div>
 
-<div class="card history">
-<span class="fav" onclick="fav(this)">❤️</span>
-<h3 onclick="openModal('History Book','World history explained')">History Book</h3>
-<p>Explore past events</p>
+<div class="card">
+<h3>📱 Mobile Friendly</h3>
+<p>Works perfectly on all devices</p>
+</div>
+</section>
+
+<!-- BOOKS -->
+<h2 class="section-title">Popular Books</h2>
+
+<section class="books">
+
+<div class="book">
+<h3>Science Book</h3>
+<p>Learn amazing science facts</p>
 </div>
 
-<div class="card science">
-<span class="fav" onclick="fav(this)">❤️</span>
-<h3 onclick="openModal('Physics Guide','Basic to advanced physics')">Physics Guide</h3>
-<p>Physics concepts</p>
+<div class="book">
+<h3>History Book</h3>
+<p>World history simplified</p>
 </div>
 
+<div class="book">
+<h3>Physics Guide</h3>
+<p>From basics to advanced</p>
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal" onclick="this.style.display='none'">
-<div class="modal-content">
-<h3 id="mTitle"></h3>
-<p id="mDesc"></p>
-</div>
-</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<h2 class="section-title">What Users Say</h2>
+
+<section class="testimonials">
+
+<div class="quote">“Best free learning platform I’ve ever used.”</div>
+<div class="quote">“Simple, fast and very helpful for studies.”</div>
+<div class="quote">“I love the clean design and books collection.”</div>
+
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+<h2>Join Our Newsletter</h2>
+<p>Get new books updates weekly</p>
+<br>
+<input placeholder="Enter your email">
+<button class="cta">Subscribe</button>
+</section>
+
+<footer>
+© 2026 OpenBookHub | Built like a Startup 💼
+</footer>
 
 <script>
-let showOnlyFav = false;
-
-/* THEME */
 function toggleTheme(){
     document.body.classList.toggle("dark");
-    localStorage.setItem("theme", document.body.classList.contains("dark"));
-}
-
-window.onload = ()=>{
-    if(localStorage.getItem("theme")==="true"){
-        document.body.classList.add("dark");
-    }
-}
-
-/* SEARCH */
-function searchBooks(){
-    let val=document.getElementById("search").value.toLowerCase();
-    let cards=document.querySelectorAll(".card");
-
-    cards.forEach(c=>{
-        c.style.display=c.innerText.toLowerCase().includes(val)?"block":"none";
-    });
-}
-
-/* FILTER */
-function filter(type){
-    showOnlyFav=false;
-    let cards=document.querySelectorAll(".card");
-
-    cards.forEach(c=>{
-        c.style.display=(type==="all" || c.classList.contains(type))?"block":"none";
-    });
-}
-
-/* FAVORITE */
-function fav(el){
-    el.classList.toggle("active");
-    el.style.color=el.classList.contains("active")?"red":"white";
-}
-
-/* SHOW FAVORITES */
-function showFav(){
-    let cards=document.querySelectorAll(".card");
-
-    cards.forEach(c=>{
-        let fav=c.querySelector(".fav").classList.contains("active");
-        c.style.display=fav?"block":"none";
-    });
-}
-
-/* MODAL */
-function openModal(title,desc){
-    document.getElementById("mTitle").innerText=title;
-    document.getElementById("mDesc").innerText=desc;
-    document.getElementById("modal").style.display="flex";
 }
 </script>
 
