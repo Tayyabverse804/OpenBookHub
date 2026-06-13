@@ -1,122 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenBookHub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenBookHub</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            color: #333;
-        }
+<style>
+    :root {
+        --bg: #f4f6f9;
+        --text: #333;
+        --card: #ffffff;
+        --primary: #1e3a8a;
+    }
 
-        /* Navbar */
-        header {
-            background: #1e3a8a;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-        }
+    body.dark {
+        --bg: #0f172a;
+        --text: #e2e8f0;
+        --card: #1e293b;
+        --primary: #3b82f6;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-        }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        transition: 0.3s;
+    }
 
-        /* Hero section */
-        .hero {
-            text-align: center;
-            padding: 50px 20px;
-            background: white;
-        }
+    header {
+        background: var(--primary);
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .hero p {
-            font-size: 18px;
-            color: #555;
-        }
+    .toggle-btn {
+        background: white;
+        color: black;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
 
-        /* Books section */
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 30px;
-        }
+    .hero {
+        text-align: center;
+        padding: 40px 20px;
+    }
 
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
-        }
+    .search-box {
+        margin-top: 15px;
+        padding: 10px;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+    .categories {
+        text-align: center;
+        margin: 20px 0;
+    }
 
-        .card h3 {
-            margin-top: 0;
-        }
+    .cat-btn {
+        margin: 5px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: var(--primary);
+        color: white;
+    }
 
-        .btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background: #1e3a8a;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 30px;
+    }
 
-        .btn:hover {
-            background: #0f2557;
-        }
+    .card {
+        background: var(--card);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: #1e3a8a;
-            color: white;
-            margin-top: 20px;
-        }
-    </style>
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 15px;
+        background: var(--primary);
+        color: white;
+    }
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>OpenBookHub</h1>
+    <h1>OpenBookHub 📚</h1>
+    <button class="toggle-btn" onclick="toggleDark()">🌙 Dark Mode</button>
 </header>
 
 <section class="hero">
-    <h2>Welcome to OpenBookHub 📚</h2>
-    <p>Discover free educational books and learning resources</p>
+    <h2>Find Free Educational Books</h2>
+    <p>Search, learn and download instantly</p>
+
+    <input class="search-box" type="text" id="search" placeholder="Search books..." onkeyup="searchBooks()">
 </section>
 
-<section class="container">
+<div class="categories">
+    <button class="cat-btn" onclick="filter('all')">All</button>
+    <button class="cat-btn" onclick="filter('science')">Science</button>
+    <button class="cat-btn" onclick="filter('history')">History</button>
+</div>
 
-    <div class="card">
+<section class="container" id="bookContainer">
+
+    <div class="card science">
         <h3>Science Book</h3>
         <p>Learn amazing science facts.</p>
-        <a class="btn" href="#">Download PDF</a>
+        <a class="btn" href="#">Download</a>
     </div>
 
-    <div class="card">
+    <div class="card history">
         <h3>History Book</h3>
         <p>Explore world history.</p>
-        <a class="btn" href="#">Download PDF</a>
+        <a class="btn" href="#">Download</a>
+    </div>
+
+    <div class="card science">
+        <h3>Physics Guide</h3>
+        <p>Basic to advanced physics concepts.</p>
+        <a class="btn" href="#">Download</a>
     </div>
 
 </section>
 
 <footer>
-    © 2026 OpenBookHub | Made with ❤️
+    © 2026 OpenBookHub | Next Level Version 🚀
 </footer>
+
+<script>
+    function toggleDark() {
+        document.body.classList.toggle("dark");
+    }
+
+    function searchBooks() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let cards = document.getElementsByClassName("card");
+
+        for (let i = 0; i < cards.length; i++) {
+            let text = cards[i].innerText.toLowerCase();
+            cards[i].style.display = text.includes(input) ? "block" : "none";
+        }
+    }
+
+    function filter(category) {
+        let cards = document.getElementsByClassName("card");
+
+        for (let i = 0; i < cards.length; i++) {
+            if (category === "all") {
+                cards[i].style.display = "block";
+            } else {
+                cards[i].style.display =
+                    cards[i].classList.contains(category) ? "block" : "none";
+            }
+        }
+    }
+</script>
 
 </body>
 </html>
